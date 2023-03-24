@@ -5,6 +5,11 @@ app.get('/',function(req,res){
  res.send ("Olá Camily")
 })
 
+app.get('/',function(req,res){
+    res.send ("Essa mensagem é automática")
+   })
+
+
 
 app.listen(3000, function(){
     
