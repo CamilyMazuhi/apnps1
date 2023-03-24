@@ -6,10 +6,12 @@ app.get('/',function(req,res){
 })
 
 app.get('/msg',function(req,res){
-    res.send ("Essa mensagem é automática")
+    res.send ("Essa mensagem é automática]")
    })
 
-
+   app.get('/msg',function(req,res){
+    res.send ("Essa página está sendo desenvolvida pela camily")
+   })
 
 app.listen(3000, function(){
     
