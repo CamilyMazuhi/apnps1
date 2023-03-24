@@ -1,0 +1,21 @@
+{
+  "name": "sistemaweb",
+  "version": "1.0.0",
+  "description": "conclusão do tcc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "apnps",
+    "sistema",
+    "web",
+    "gerenciamento"
+  ],
+  "author": "Camily Mazuhi",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "node": "^19.8.1"
+  }
+}
