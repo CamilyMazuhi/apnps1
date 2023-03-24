@@ -14,7 +14,7 @@ app.get('/msg',function(req,res){
    })
 
    app.get('/layout',function(req,res){
-    res.send ("Esse é novo layout")
+    res.send ("criação layout")
    })
 app.listen(3000, function(){
     
