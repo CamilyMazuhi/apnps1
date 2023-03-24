@@ -13,6 +13,9 @@ app.get('/msg',function(req,res){
     res.send ("Essa página está sendo desenvolvida pela camily")
    })
 
+   app.get('/layout',function(req,res){
+    res.send ("Esse é novo layout")
+   })
 app.listen(3000, function(){
     
     console.log("Conexão inicializada")
