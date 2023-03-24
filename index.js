@@ -11,8 +11,10 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.set ("view engine","ejs")
 
 app.use(express.static(path.join(__dirname,"public")))
+
+
 app.get('/',function(req,res){
- res.send ("Olá Camily")
+ res.render ('index.ejs',{})
 })
 
 app.listen(3000, function(){
