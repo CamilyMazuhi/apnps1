@@ -7,14 +7,19 @@
     <title>Usuários</title>
 </head>
 <body>
-    <ul>
+    <table border="1">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+        </tr>
         <%for(usuario of usuarios) { %>
-        <li>
-            <%= usuario %>
-</li>
-                  <% } %>
+        <tr>
+            <td><%=usuario.nome%></td>
+            <td><%=usuario.email%></td>
+        </tr>
+        <% } %>
+    </table>
  
-    </ul>
     
 </body>
 </html>

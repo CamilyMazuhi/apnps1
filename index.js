@@ -18,7 +18,14 @@ app.get('/',function(req,res){
 })
 
 app.get('/usuarios',function(req,res){
-    res.render ('usuarios.ejs',{usuarios:['Diego','Maria','Tereza','Ana','Lucia','José']})
+    res.render ('usuarios.ejs',{usuarios:[
+        {Nome:'camily',email: 'camily@gmail.com'},
+        {Nome:'Diego',email: 'Diego@gmail.com'},
+        {Nome:'Tais',email: 'Tais@gmail.com'},
+        {Nome:'José',email: 'José@gmail.com'}
+    ]
+
+    })
    }) 
 
 app.listen(3000, function(){
