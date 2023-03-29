@@ -22,7 +22,15 @@ app.get('/',function(req,res){
 
 })
     
+app.post('/', function(req,res){
+ Usuario.find({nome: new RegExp(req.body.txtPesquisa,'gi')}).exec(function(err,docs){
+    res.render('index.ejs',{Usuarios:docs})
+ }
+ )
+}
 
+
+)
 
 
 
