@@ -1,4 +1,4 @@
-var conexao = require ('../config/conexao.js')
+var conexao = require('../config/conexao.js')
 var UsuarioSchema = conexao.Schema( {
     nome:{type:String},
     email:{type:String},

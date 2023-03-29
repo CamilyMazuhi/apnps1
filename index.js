@@ -1,9 +1,10 @@
-const express= require ('express')
+const express= require('express')
 const app=express ()
-var bodyParser= require('body-parser')
-var cookieParser= require('cookie-parser')
+var bodyParser=require('body-parser')
+var cookieParser=require('cookie-parser')
 var path=require ('path')
 var Usuario=require('./model/usuario')
+const { execFileSync } = require('child_process')
 
 app.use(cookieParser())
 app.use(bodyParser.json())
@@ -15,8 +16,14 @@ app.use(express.static(path.join(__dirname,"public")))
 
 
 app.get('/',function(req,res){
- res.render ('index.ejs',{})
+    Usuario.find({}).exec(function(err,docs){
+        res.render ('index.ejs',{Usuarios:docs})
+    } )
+
 })
+    
+
+
 
 
 
@@ -34,7 +41,7 @@ app.get('/',function(req,res){
     email:req.body.txtEmail,
     senha:req.body.txtSenha,
     foto:req.body.txtFoto
-   })
+  
 })
 
 usuario.save(function(err){
@@ -46,7 +53,49 @@ usuario.save(function(err){
 }
 
 )
+})
+app.get('/del/:id',function(req,res){
+    Usuario.findByIdAndDelete(req.params.id,function(err){
+        if(err){
+            console.log(err)
+        }else{
+            res.redirect('/')
+        }
+    }
+    )
+    app.get('/edit/:id',function(req,res){
+        Usuario.findById(Req.params.id,function(err,docs){
+            if(err){
+                console.log(err)
+            }else{
+                res.render(c,{Usuario:docs})
+            }
+        }
+            )
+        res.render('edita.ejs',{})
+    }
+    )
 
+app.post('/edit/id',function(req,res){
+    Usuario.findByIdAndUpdate(req.params.id,
+        { 
+            nome:req.body.txtNome,
+            email:req.body.txtEmail,
+            senha:req.body.txtSenha,
+            foto:req.body.txtFoto
+        } ,function(err,docs){
+            res.redirect('/')
+        }
+        )
+
+
+}
+
+)
+   
+
+}
+)
    
    
 

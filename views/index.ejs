@@ -4,10 +4,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
+    <title>Usuários</title>
 </head>
 <body>
-    <h1>Página inicial</h1>
-    <p>seja bem vindo á minha página inicial</p>
+    <h1>Lista de usuários</h1>
+   <style>
+    table,td,th{
+        border:1px solid blueviolet;
+    }
+    th{
+        font-weight:bolder;
+    }
+    td,th {
+        padding: 5px;
+    }
+   </style>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Foto</th>
+            <th>Deletar</th>
+            <th>Editar</th>
+        </tr>
+
+        <%for(usuario of Usuarios){%>
+ <tr>
+            <td><%=usuario._id%></td>
+            <td><%=usuario._nome%></td>
+            <td><%=usuario._email%></td>
+            <td><%=usuario._foto%></td>
+            <td>
+                <a href="/del/<%=usuario._id%>">Deletar</a>
+            </td>
+            
+            <td>
+                <a href="/edit/<%=usuario._id%>">Editar</a>
+            </td>
+
+        </tr>
+        <% } %>
+
+    </table>
 </body>
 </html>
