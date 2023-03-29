@@ -1,4 +1,4 @@
-var conexao = require ('/config/conexao')
+var conexao = require ('../config/conexao.js')
 var UsuarioSchema = conexao.Schema( {
     nome:{type:String},
     email:{type:String},
@@ -6,4 +6,4 @@ var UsuarioSchema = conexao.Schema( {
     foto:{type:String}
   
 })
-module.exports=conexao.model("Usuario",UsuarioSchema)
+module.exports = conexao.model("Usuario",UsuarioSchema)
