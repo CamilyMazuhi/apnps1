@@ -4,6 +4,7 @@ var bodyParser=require('body-parser')
 var cookieParser=require('cookie-parser')
 var path=require ('path')
 var Usuario=require('./model/usuario')
+var upload=require('./config/configMulter')
 const { execFileSync } = require('child_process')
 
 app.use(cookieParser())
@@ -43,12 +44,12 @@ app.post('/', function(req,res){
 
    })
 
-   app.post('/add',function(req,res){
+   app.post('/add',upload.single("txtFoto"),function(req,res){
    var usuario=new Usuario({
     nome:req.body.txtNome,
     email:req.body.txtEmail,
     senha:req.body.txtSenha,
-    foto:req.body.txtFoto
+    foto:req.file.filename
   
 })
 
@@ -84,13 +85,13 @@ app.get('/del/:id',function(req,res){
     }
     )
 
-app.post('/edit/id',function(req,res){
+app.post('/edit/id',upload.single("txtFoto"),function(req,res){
     Usuario.findByIdAndUpdate(req.params.id,
         { 
             nome:req.body.txtNome,
             email:req.body.txtEmail,
             senha:req.body.txtSenha,
-            foto:req.body.txtFoto
+            foto:req.file.filename
         } ,function(err,docs){
             res.redirect('/')
         }
