@@ -19,7 +19,7 @@
         <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Email</th>
+            <th>Tipo</th>
             <th>Foto</th>
             <th>Deletar</th>
             <th>Editar</th>
@@ -28,9 +28,9 @@
         <%for(usuario of Usuarios){%>
  <tr>
             <td><%=usuario._id%></td>
-            <td><%=usuario._nome%></td>
-            <td><%=usuario._email%></td>
-            <td><img class="foto" src="/fotos/<%=usuario.fotos%>"/></td>
+            <td><%=usuario.nome%></td>
+            <td><%=usuario.email%></td>
+            <td><img class="foto" src="/fotos/<%=usuario.foto%>"/></td>
             <td>
                 <a href="/del/<%=usuario._id%>">Deletar</a>
             </td>

@@ -45,11 +45,11 @@ app.post('/', function(req,res){
    })
 
    app.post('/add',upload.single("txtFoto"),function(req,res){
+    console.log(req.file)
    var usuario=new Usuario({
     nome:req.body.txtNome,
     email:req.body.txtEmail,
-    senha:req.body.txtSenha,
-    foto:req.file.filename
+   foto:req.file.filename
   
 })
 
@@ -90,7 +90,6 @@ app.post('/edit/id',upload.single("txtFoto"),function(req,res){
         { 
             nome:req.body.txtNome,
             email:req.body.txtEmail,
-            senha:req.body.txtSenha,
             foto:req.file.filename
         } ,function(err,docs){
             res.redirect('/')
@@ -106,7 +105,9 @@ app.post('/edit/id',upload.single("txtFoto"),function(req,res){
 }
 )
    
-   
+   app.get("/site",function(req,res){
+    res.render("site")
+   })
 
 app.listen(3000, function(){
     
