@@ -1,33 +1,33 @@
-const express= require('express')
-const app=express ()
-var bodyParser=require('body-parser')
-var cookieParser=require('cookie-parser')
-var path=require ('path')
-var Usuario=require('./model/usuario')
-var upload=require('./config/configMulter')
+const express = require('express')
+const app = express()
+var bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
+var path = require('path')
+var Usuario = require('./model/usuario')
+var upload = require('./config/configMulter')
 const { execFileSync } = require('child_process')
 
 app.use(cookieParser())
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.set ("view engine","ejs")
+app.set("view engine", "ejs")
 
-app.use(express.static(path.join(__dirname,"public")))
+app.use(express.static(path.join(__dirname, "public")))
 
 
-app.get('/',function(req,res){
-    Usuario.find({}).exec(function(err,docs){
-        res.render ('index.ejs',{Usuarios:docs})
-    } )
+app.get('/', function (req, res) {
+    Usuario.find({}).exec(function (err, docs) {
+        res.render('index.ejs', { Usuarios: docs })
+    })
 
 })
-    
-app.post('/', function(req,res){
- Usuario.find({nome: new RegExp(req.body.txtPesquisa,'gi')}).exec(function(err,docs){
-    res.render('index.ejs',{Usuarios:docs})
- }
- )
+
+app.post('/', function (req, res) {
+    Usuario.find({ nome: new RegExp(req.body.txtPesquisa, 'gi') }).exec(function (err, docs) {
+        res.render('index.ejs', { Usuarios: docs })
+    }
+    )
 }
 
 
@@ -38,79 +38,76 @@ app.post('/', function(req,res){
 
 
 
-   app.get('/add',function(req,res){
+app.get('/add', function (req, res) {
     res.render('adiciona.ejs')
 
 
-   })
+})
 
-   app.post('/add',upload.single("txtFoto"),function(req,res){
+app.post('/add', upload.single("txtFoto"), function (req, res) {
     console.log(req.file)
-   var usuario=new Usuario({
-    nome:req.body.txtNome,
-    email:req.body.txtEmail,
-   foto:req.file.filename
-  
-})
+    var usuario = new Usuario({
+        nome: req.body.txtNome,
+        email: req.body.txtEmail,
+        foto: req.file.filename
 
-usuario.save(function(err){
-    if(err){
-        console.log(err)
-    }else{
-        res.redirect('/');
-    }
-}
+    })
 
-)
-})
-app.get('/del/:id',function(req,res){
-    Usuario.findByIdAndDelete(req.params.id,function(err){
-        if(err){
+    usuario.save(function (err) {
+        if (err) {
             console.log(err)
-        }else{
+        } else {
+            res.redirect('/');
+        }
+    }
+
+    )
+})
+app.get('/del/:id', function (req, res) {
+    Usuario.findByIdAndDelete(req.params.id, function (err) {
+        if (err) {
+            console.log(err)
+        } else {
             res.redirect('/')
         }
     }
     )
-    app.get('/edit/:id',function(req,res){
-        Usuario.findById(Req.params.id,function(err,docs){
-            if(err){
-                console.log(err)
-            }else{
-                res.render(c,{Usuario:docs})
-            }
+})
+app.get('/edit/:id', function (req, res) {
+    Usuario.findById(req.params.id, function (err, docs) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('edita.ejs',{ Usuario: docs })
         }
-            )
-        res.render('edita.ejs',{})
     }
     )
-
-app.post('/edit/id',upload.single("txtFoto"),function(req,res){
-    Usuario.findByIdAndUpdate(req.params.id,
-        { 
-            nome:req.body.txtNome,
-            email:req.body.txtEmail,
-            foto:req.file.filename
-        } ,function(err,docs){
-            res.redirect('/')
-        }
-        )
-
-
-}
-
-)
-   
-
-}
-)
-   
-   app.get("/site",function(req,res){
-    res.render("site")
-   })
-
-app.listen(3000, function(){
     
+}
+)
+
+app.post('/edit/:id', upload.single("txtFoto"), function (req, res) {
+    Usuario.findByIdAndUpdate(req.params.id,
+        {
+            nome: req.body.txtNome,
+            email: req.body.txtEmail,
+            foto: req.file.filename
+        }, function (err, docs) {
+            res.redirect('/')
+        }
+    )
+}
+)
+
+
+app.get("/site", function (req, res) {
+    Usuario.find({}).exec(function (err, docs) {
+        res.render('site.ejs', { Usuarios: docs })
+    })
+})
+
+app.listen(3000, function () {
+
     console.log("Conexão inicializada")
 
 })
